@@ -85,11 +85,11 @@ const sideTemplate = `<style>
   }
 </style>
 <div class="left-model">
-  <span class="side-logo"> <img src="https://cdn.casbin.org/img/casdoor-logo_1185x256.png" alt="Casdoor" style="width: 120px"> 
+  <span class="side-logo"> <img src="https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/%E6%98%9F%E8%8A%B8%E7%BD%91%E7%BB%9C_%E5%89%AA%E5%88%87%E5%90%8E.png" alt="星芸网络" style="width: 120px"> 
     <span>SSO</span> 
   </span>
   <div class="img">
-    <img src="https://cdn.casbin.org/img/casbin.svg" alt="Casdoor"/>
+    <img src="https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F.png" alt="星芸网络"/>
   </div>
 </div>
 `;

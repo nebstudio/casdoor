@@ -287,7 +287,7 @@ class App extends Component {
               : (
                 Conf.CustomFooter !== null ? Conf.CustomFooter : (
                   <React.Fragment>
-                  Powered by <a target="_blank" href="https://casdoor.org" rel="noreferrer"><img style={{paddingBottom: "3px"}} height={"20px"} alt={"Casdoor"} src={this.state.logo} /></a>
+                  Powered by <a target="_blank" href="https://www.xing-yun.cn" rel="noreferrer"><img style={{paddingBottom: "3px"}} height={"20px"} alt={"星芸网络"} src={this.state.logo} /></a>
                   </React.Fragment>
                 )
               )
@@ -302,18 +302,18 @@ class App extends Component {
       <Drawer
         title={
           <React.Fragment>
-            <Tooltip title="Want to deploy your own AI assistant? Click to learn more!">
-              <a target="_blank" rel="noreferrer" href={"https://casdoor.com"}>
-                <img style={{width: "20px", marginRight: "10px", marginBottom: "2px"}} alt="help" src="https://casbin.org/img/casbin.svg" />
-                AI Assistant
+            <Tooltip title="想使用AI获取帮助吗? 点击我使用!">
+              <a target="_blank" rel="noreferrer" href={"https://tips.huawei.fit"}>
+                <img style={{width: "20px", marginRight: "10px", marginBottom: "2px"}} alt="help" src="https://wsswsycloud.xk404.com/favicon.svg" />
+                Tips - HUAWEI.FIT
               </a>
             </Tooltip>
-            <a className="custom-link" style={{float: "right", marginTop: "2px"}} target="_blank" rel="noreferrer" href={"https://ai.casbin.com"}>
+            <a className="custom-link" style={{float: "right", marginTop: "2px"}} target="_blank" rel="noreferrer" href={"https://tips.huawei.fit"}>
               <ShareAltOutlined className="custom-link" style={{fontSize: "20px", color: "rgb(140,140,140)"}} />
             </a>
-            <a className="custom-link" style={{float: "right", marginRight: "30px", marginTop: "2px"}} target="_blank" rel="noreferrer" href={"https://github.com/casibase/casibase"}>
+            {/* <a className="custom-link" style={{float: "right", marginRight: "30px", marginTop: "2px"}} target="_blank" rel="noreferrer" href={"https://github.com/casibase/casibase"}>
               <GithubOutlined className="custom-link" style={{fontSize: "20px", color: "rgb(140,140,140)"}} />
-            </a>
+            </a> */}
           </React.Fragment>
         }
         placement="right"
@@ -326,7 +326,7 @@ class App extends Component {
         }}
         visible={this.state.isAiAssistantOpen}
       >
-        <iframe id="iframeHelper" title={"iframeHelper"} src={"https://ai.casbin.com/?isRaw=1"} width="100%" height="100%" scrolling="no" frameBorder="no" />
+        <iframe id="iframeHelper" title={"iframeHelper"} src={"https://tips.huawei.fit"} width="100%" height="100%" scrolling="no" frameBorder="no" />
       </Drawer>
     );
   }
@@ -479,7 +479,7 @@ class App extends Component {
           &nbsp;&nbsp;
           {i18next.t("general:Found some texts still not translated? Please help us translate at")}
           &nbsp;
-          <a target="_blank" rel="noreferrer" href={"https://crowdin.com/project/casdoor-site"}>
+          <a target="_blank" rel="noreferrer" href={"##"}>
             Crowdin
           </a>
           &nbsp;!&nbsp;🙏
@@ -493,7 +493,7 @@ class App extends Component {
       <React.Fragment>
         {(this.state.account === undefined || this.state.account === null) ?
           <Helmet>
-            <link rel="icon" href={"https://cdn.casdoor.com/static/favicon.png"} />
+            <link rel="icon" href={"https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/logo-small.png"} />
           </Helmet> :
           <Helmet>
             <title>{this.state.account.organization?.displayName}</title>
