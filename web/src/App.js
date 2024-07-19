@@ -18,7 +18,7 @@ import {Helmet} from "react-helmet";
 import * as Setting from "./Setting";
 import {setOrgIsTourVisible, setTourLogo} from "./TourConfig";
 import {StyleProvider, legacyLogicalPropertiesTransformer} from "@ant-design/cssinjs";
-import {GithubOutlined, InfoCircleFilled, ShareAltOutlined} from "@ant-design/icons";
+import {InfoCircleFilled, ShareAltOutlined} from "@ant-design/icons";
 import {Alert, Button, ConfigProvider, Drawer, FloatButton, Layout, Result, Tooltip} from "antd";
 import {Route, Switch, withRouter} from "react-router-dom";
 import CustomGithubCorner from "./common/CustomGithubCorner";
