@@ -11,7 +11,7 @@ RUN ./build.sh
 RUN go test -v -run TestGetVersionInfo ./util/system_test.go ./util/system.go > version_info.txt
 
 FROM alpine:latest AS STANDARD
-LABEL MAINTAINER="https://casdoor.org/"
+LABEL MAINTAINER="https://www.xing-yun.cn"
 ARG USER=casdoor
 ARG TARGETOS
 ARG TARGETARCH
@@ -49,7 +49,7 @@ RUN apt update \
 
 
 FROM db AS ALLINONE
-LABEL MAINTAINER="https://casdoor.org/"
+LABEL MAINTAINER="https://www.xing-yun.cn"
 ARG TARGETOS
 ARG TARGETARCH
 ENV BUILDX_ARCH="${TARGETOS:-linux}_${TARGETARCH:-amd64}"
