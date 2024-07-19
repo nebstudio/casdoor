@@ -141,18 +141,46 @@ jobs:
         with:
           node-version: 20
 
+      - name: Check Secrets
+        run: |
+          if [ -z "${{ secrets.GH_BOT_TOKEN }}" ]; then
+            echo "GH_BOT_TOKEN is not set"
+            exit 1
+          else
+            echo "GH_BOT_TOKEN is set"
+          fi
+
+          if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then
+            echo "DOCKERHUB_USERNAME is not set"
+            exit 1
+          else
+            echo "DOCKERHUB_USERNAME is set"
+          fi
+
+          if [ -z "${{ secrets.DOCKERHUB_PASSWORD }}" ]; then
+            echo "DOCKERHUB_PASSWORD is not set"
+            exit 1
+          else
+            echo "DOCKERHUB_PASSWORD is set"
+          fi
+
       - name: Fetch Previous version
         id: get-previous-tag
         uses: actions-ecosystem/action-get-latest-tag@v1.6.0
+
+      - name: Fetch Current version
+        id: get-current-tag
+        uses: actions-ecosystem/action-get-latest-tag@v1.6.0
+
+      - name: Check Versions
+        run: |
+          echo "Previous version: ${{ steps.get-previous-tag.outputs.tag }}"
+          echo "Current version: ${{ steps.get-current-tag.outputs.tag }}"
 
       - name: Release
         run: yarn global add semantic-release@17.4.4 && semantic-release
         env:
           GH_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
-
-      - name: Fetch Current version
-        id: get-current-tag
-        uses: actions-ecosystem/action-get-latest-tag@v1.6.0
 
       - name: Decide Should_Push Or Not
         id: should_push
@@ -203,7 +231,7 @@ jobs:
           target: STANDARD
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: nebstudio/nebstudio-cas:${{steps.get-current-tag.outputs.tag}},nebstudio/nebstudio-cas:latest
+          tags: nebstudio/nebstudio-cas:${{ steps.get-current-tag.outputs.tag }},nebstudio/nebstudio-cas:latest
 
       - name: Push All In One Version to Docker Hub
         if: github.repository == 'nebstudio/casdoor' && github.event_name == 'push' && steps.should_push.outputs.push == 'true'
@@ -213,4 +241,4 @@ jobs:
           target: ALLINONE
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: nebstudio/nebstudio-cas-all-in-one:${{steps.get-current-tag.outputs.tag}},nebstudio/nebstudio-cas-all-in-one:latest
+          tags: nebstudio/nebstudio-cas-all-in-one:${{ steps.get-current-tag.outputs.tag }},nebstudio/nebstudio-cas-all-in-one:latest
