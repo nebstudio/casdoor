@@ -1,21 +1,11 @@
 {
-    "short_name": "星芸网络统一认证门户",
+    "short_name": "星芸统一认证",
     "name": "星芸网络统一认证门户",
     "icons": [
         {
-            "src": "https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/logo-small.png",
-            "sizes": "64x64 32x32 24x24 16x16",
-            "type": "image/x-icon"
-        },
-        {
-            "src": "https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/logo-small.png",
+            "src": "./logo-small.png",
             "type": "image/png",
-            "sizes": "192x192"
-        },
-        {
-            "src": "https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/logo-small.png",
-            "type": "image/png",
-            "sizes": "512x512"
+            "sizes": "209x209"
         }
     ],
     "start_url": ".",
