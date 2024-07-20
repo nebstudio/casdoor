@@ -1,11 +1,11 @@
-import {CopyOutlined, UserOutlined} from "@ant-design/icons";
-import {Button, Col, Form, Input, QRCode, Space} from "antd";
+import { CopyOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, QRCode, Space } from "antd";
 import copy from "copy-to-clipboard";
 import i18next from "i18next";
 import React from "react";
 import * as Setting from "../../Setting";
 
-export const MfaVerifyTotpForm = ({mfaProps, onFinish}) => {
+export const MfaVerifyTotpForm = ({ mfaProps, onFinish }) => {
   const [form] = Form.useForm();
 
   const renderSecret = () => {
@@ -15,15 +15,15 @@ export const MfaVerifyTotpForm = ({mfaProps, onFinish}) => {
 
     return (
       <React.Fragment>
-        <Col span={24} style={{display: "flex", justifyContent: "center"}}>
+        <Col span={24} style={{ display: "flex", justifyContent: "center" }}>
           <QRCode
             errorLevel="H"
             value={mfaProps.url}
             icon={"https://cdn-ai-new-xyai-1319649835.cos.ap-guangzhou.myqcloud.com/other/logo-small.png"}
           />
         </Col>
-        <p style={{textAlign: "center"}}>{i18next.t("mfa:Scan the QR code with your Authenticator App")}</p>
-        <p style={{textAlign: "center"}}>{i18next.t("mfa:Or copy the secret to your Authenticator App")}</p>
+        <p style={{ textAlign: "center" }}>{i18next.t("mfa:Scan the QR code with your Authenticator App")}</p>
+        <p style={{ textAlign: "center" }}>{i18next.t("mfa:Or copy the secret to your Authenticator App")}</p>
         <Col span={24}>
           <Space>
             <Input value={mfaProps.secret} />
@@ -39,16 +39,16 @@ export const MfaVerifyTotpForm = ({mfaProps, onFinish}) => {
   return (
     <Form
       form={form}
-      style={{width: "300px"}}
+      style={{ width: "300px" }}
       onFinish={onFinish}
     >
       {renderSecret()}
       <Form.Item
         name="passcode"
-        rules={[{required: true, message: "Please input your passcode"}]}
+        rules={[{ required: true, message: "Please input your passcode" }]}
       >
         <Input
-          style={{marginTop: 24}}
+          style={{ marginTop: 24 }}
           prefix={<UserOutlined />}
           placeholder={i18next.t("mfa:Passcode")}
           autoComplete="off"
@@ -56,7 +56,7 @@ export const MfaVerifyTotpForm = ({mfaProps, onFinish}) => {
       </Form.Item>
       <Form.Item>
         <Button
-          style={{marginTop: 24}}
+          style={{ marginTop: 24 }}
           loading={false}
           block
           type="primary"

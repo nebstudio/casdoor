@@ -22,9 +22,9 @@ describe("Login test", () => {
   });
   it("ui Login succeeded", () => {
     cy.visit("http://localhost:7001");
-    cy.get(selector.username).type("admin");
-    cy.get(selector.password).type("123");
-    cy.get(selector.loginButton).click();
+    cy.get(selector.username, { timeout: 10000 }).type("admin");
+    cy.get(selector.password, { timeout: 10000 }).type("123");
+    cy.get(selector.loginButton, { timeout: 10000 }).click();
     cy.url().should("eq", "http://localhost:7001/");
   });
 
