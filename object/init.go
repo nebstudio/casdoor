@@ -172,7 +172,7 @@ func initBuiltInApplication() {
 		Owner:          "admin",
 		Name:           "app-built-in",
 		CreatedTime:    util.GetCurrentTime(),
-		DisplayName:    "Casdoor",
+		DisplayName:    "星芸网络统一认证门户",
 		Logo:           fmt.Sprintf("%s/img/casdoor-logo_1185x256.png", conf.GetConfigString("staticBaseUrl")),
 		HomepageUrl:    "https://casdoor.org",
 		Organization:   "built-in",
