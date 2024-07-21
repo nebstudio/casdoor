@@ -1472,7 +1472,7 @@ export function getUserCommonFields() {
 }
 
 export function getDefaultFooterContent() {
-  return "Powered by <a target=\"_blank\" href=\"https://casdoor.org\" rel=\"noreferrer\"><img style=\"padding-bottom: 3px\" height=\"20\" alt=\"Casdoor\" src=\"https://cdn.casbin.org/img/casdoor-logo_1185x256.png\"/></a>";
+  return "<small> 星芸网络统一认证平台  © 2023-2024 版权所有 | <a href=\"https://beian.miit.gov.cn\" rel=\"nofollow\" style=\"color: #666; text-decoration: none;\" target=\"_blank\">鲁ICP备2022041583号-1</a> 经营许可备 <a href=\"https://www.beian.gov.cn\" rel=\"nofollow\" style=\"color: #666; text-decoration: none;\" target=\"_blank\">鲁B2-20231062</a></small>";
 }
 
 export function getEmptyFooterContent() {
