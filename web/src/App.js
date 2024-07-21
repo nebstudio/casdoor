@@ -287,7 +287,7 @@ class App extends Component {
               : (
                 Conf.CustomFooter !== null ? Conf.CustomFooter : (
                   <React.Fragment>
-                  Powered by <a target="_blank" href="https://www.xing-yun.cn" rel="noreferrer"><img style={{paddingBottom: "3px"}} height={"20px"} alt={"星芸网络"} src={this.state.logo} /></a>
+                  Powered by <a target="_blank" href="https://www.xing-yun.cn" rel="noreferrer"><img style={{paddingBottom: "3px"}} height={"20px"} alt={"星芸网络"} src="https://cdn-ai-new-xyai-1319649835.cos.accelerate.myqcloud.com/other/%E6%98%9F%E8%8A%B8%E7%BD%91%E7%BB%9C_%E5%89%AA%E5%88%87%E5%90%8E.png" /></a>
                   </React.Fragment>
                 )
               )
