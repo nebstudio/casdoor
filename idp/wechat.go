@@ -250,7 +250,7 @@ func BuildWechatOpenIdKey(appId string) string {
 }
 
 func GetWechatOfficialAccountAccessToken(clientId string, clientSecret string) (string, string, error) {
-	accessTokenUrl := fmt.Sprintf("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", clientId, clientSecret)
+	accessTokenUrl := fmt.Sprintf("https://wxredirect.xing-yun.cn/token?grant_type=client_credential&appid=%s&secret=%s", clientId, clientSecret)
 	request, err := http.NewRequest("GET", accessTokenUrl, nil)
 	if err != nil {
 		return "", "", err
