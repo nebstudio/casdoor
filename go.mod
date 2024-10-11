@@ -11,8 +11,9 @@ require (
 	github.com/casbin/casbin/v2 v2.77.2
 	github.com/casdoor/go-sms-sender v0.24.0
 	github.com/casdoor/gomail/v2 v2.0.1
+	github.com/casdoor/ldapserver v1.2.0
 	github.com/casdoor/notify v0.45.0
-	github.com/casdoor/oss v1.7.0
+	github.com/casdoor/oss v1.8.0
 	github.com/casdoor/xorm-adapter/v3 v3.1.0
 	github.com/casvisor/casvisor-go-sdk v1.4.0
 	github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f
@@ -20,7 +21,6 @@ require (
 	github.com/elazarl/go-bindata-assetfs v1.0.1 // indirect
 	github.com/elimity-com/scim v0.0.0-20230426070224-941a5eac92f3
 	github.com/fogleman/gg v1.3.0
-	github.com/forestmgy/ldapserver v1.1.0
 	github.com/go-asn1-ber/asn1-ber v1.5.5
 	github.com/go-git/go-git/v5 v5.11.0
 	github.com/go-ldap/ldap/v3 v3.4.6
@@ -30,7 +30,7 @@ require (
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible
 	github.com/go-webauthn/webauthn v0.6.0
 	github.com/golang-jwt/jwt/v4 v4.5.0
-	github.com/google/uuid v1.4.0
+	github.com/google/uuid v1.6.0
 	github.com/json-iterator/go v1.1.12
 	github.com/lestrrat-go/jwx v1.2.29
 	github.com/lib/pq v1.10.9

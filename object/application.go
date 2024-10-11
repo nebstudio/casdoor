@@ -31,15 +31,17 @@ type SigninMethod struct {
 }
 
 type SignupItem struct {
-	Name        string `json:"name"`
-	Visible     bool   `json:"visible"`
-	Required    bool   `json:"required"`
-	Prompted    bool   `json:"prompted"`
-	CustomCss   string `json:"customCss"`
-	Label       string `json:"label"`
-	Placeholder string `json:"placeholder"`
-	Regex       string `json:"regex"`
-	Rule        string `json:"rule"`
+	Name        string   `json:"name"`
+	Visible     bool     `json:"visible"`
+	Required    bool     `json:"required"`
+	Prompted    bool     `json:"prompted"`
+	Type        string   `json:"type"`
+	CustomCss   string   `json:"customCss"`
+	Label       string   `json:"label"`
+	Placeholder string   `json:"placeholder"`
+	Options     []string `json:"options"`
+	Regex       string   `json:"regex"`
+	Rule        string   `json:"rule"`
 }
 
 type SigninItem struct {
@@ -78,13 +80,14 @@ type Application struct {
 	EnableSamlCompress    bool            `json:"enableSamlCompress"`
 	EnableSamlC14n10      bool            `json:"enableSamlC14n10"`
 	EnableSamlPostBinding bool            `json:"enableSamlPostBinding"`
+	UseEmailAsSamlNameId  bool            `json:"useEmailAsSamlNameId"`
 	EnableWebAuthn        bool            `json:"enableWebAuthn"`
 	EnableLinkWithEmail   bool            `json:"enableLinkWithEmail"`
 	OrgChoiceMode         string          `json:"orgChoiceMode"`
 	SamlReplyUrl          string          `xorm:"varchar(100)" json:"samlReplyUrl"`
 	Providers             []*ProviderItem `xorm:"mediumtext" json:"providers"`
 	SigninMethods         []*SigninMethod `xorm:"varchar(2000)" json:"signinMethods"`
-	SignupItems           []*SignupItem   `xorm:"varchar(2000)" json:"signupItems"`
+	SignupItems           []*SignupItem   `xorm:"varchar(3000)" json:"signupItems"`
 	SigninItems           []*SigninItem   `xorm:"mediumtext" json:"signinItems"`
 	GrantTypes            []string        `xorm:"varchar(1000)" json:"grantTypes"`
 	OrganizationObj       *Organization   `xorm:"-" json:"organizationObj"`
@@ -97,6 +100,7 @@ type Application struct {
 	ClientSecret         string     `xorm:"varchar(100)" json:"clientSecret"`
 	RedirectUris         []string   `xorm:"varchar(1000)" json:"redirectUris"`
 	TokenFormat          string     `xorm:"varchar(100)" json:"tokenFormat"`
+	TokenSigningMethod   string     `xorm:"varchar(100)" json:"tokenSigningMethod"`
 	TokenFields          []string   `xorm:"varchar(1000)" json:"tokenFields"`
 	ExpireInHours        int        `json:"expireInHours"`
 	RefreshExpireInHours int        `json:"refreshExpireInHours"`
@@ -530,7 +534,7 @@ func GetMaskedApplication(application *Application, userId string) *Application 
 
 	providerItems := []*ProviderItem{}
 	for _, providerItem := range application.Providers {
-		if providerItem.Provider != nil && (providerItem.Provider.Category == "OAuth" || providerItem.Provider.Category == "Web3" || providerItem.Provider.Category == "Captcha") {
+		if providerItem.Provider != nil && (providerItem.Provider.Category == "OAuth" || providerItem.Provider.Category == "Web3" || providerItem.Provider.Category == "Captcha" || providerItem.Provider.Category == "SAML") {
 			providerItems = append(providerItems, providerItem)
 		}
 	}

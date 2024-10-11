@@ -56,10 +56,12 @@ type Organization struct {
 	WebsiteUrl             string     `xorm:"varchar(100)" json:"websiteUrl"`
 	Logo                   string     `xorm:"varchar(200)" json:"logo"`
 	LogoDark               string     `xorm:"varchar(200)" json:"logoDark"`
-	Favicon                string     `xorm:"varchar(100)" json:"favicon"`
+	Favicon                string     `xorm:"varchar(200)" json:"favicon"`
 	PasswordType           string     `xorm:"varchar(100)" json:"passwordType"`
 	PasswordSalt           string     `xorm:"varchar(100)" json:"passwordSalt"`
 	PasswordOptions        []string   `xorm:"varchar(100)" json:"passwordOptions"`
+	PasswordObfuscatorType string     `xorm:"varchar(100)" json:"passwordObfuscatorType"`
+	PasswordObfuscatorKey  string     `xorm:"varchar(100)" json:"passwordObfuscatorKey"`
 	CountryCodes           []string   `xorm:"varchar(200)"  json:"countryCodes"`
 	DefaultAvatar          string     `xorm:"varchar(200)" json:"defaultAvatar"`
 	DefaultApplication     string     `xorm:"varchar(100)" json:"defaultApplication"`
@@ -79,9 +81,9 @@ type Organization struct {
 	AccountItems []*AccountItem `xorm:"varchar(5000)" json:"accountItems"`
 }
 
-func GetOrganizationCount(owner, field, value string) (int64, error) {
+func GetOrganizationCount(owner, name, field, value string) (int64, error) {
 	session := GetSession(owner, -1, -1, field, value, "", "")
-	return session.Count(&Organization{})
+	return session.Count(&Organization{Name: name})
 }
 
 func GetOrganizations(owner string, name ...string) ([]*Organization, error) {

@@ -19,6 +19,7 @@ import {withRouter} from "react-router-dom";
 import * as UserWebauthnBackend from "../backend/UserWebauthnBackend";
 import OrganizationSelect from "../common/select/OrganizationSelect";
 import * as Conf from "../Conf";
+import * as Obfuscator from "./Obfuscator";
 import * as AuthBackend from "./AuthBackend";
 import * as OrganizationBackend from "../backend/OrganizationBackend";
 import * as ApplicationBackend from "../backend/ApplicationBackend";
@@ -379,6 +380,14 @@ class LoginPage extends React.Component {
       return;
     }
     if (this.state.loginMethod === "password" || this.state.loginMethod === "ldap") {
+      const organization = this.getApplicationObj()?.organizationObj;
+      const [passwordCipher, errorMessage] = Obfuscator.encryptByPasswordObfuscator(organization?.passwordObfuscatorType, organization?.passwordObfuscatorKey, values["password"]);
+      if (errorMessage.length > 0) {
+        Setting.showMessage("error", errorMessage);
+        return;
+      } else {
+        values["password"] = passwordCipher;
+      }
       if (this.state.enableCaptchaModal === CaptchaRule.Always) {
         this.setState({
           openCaptchaModal: true,
@@ -938,7 +947,7 @@ class LoginPage extends React.Component {
             signinItem.label ? Setting.renderSignupLink(application, signinItem.label) :
               (
                 <React.Fragment>
-                  {i18next.t("login:No account?")}
+                  {i18next.t("login:No account?")}&nbsp;
                   {
                     Setting.renderSignupLink(application, i18next.t("login:sign up now"))
                   }
@@ -1125,6 +1134,9 @@ class LoginPage extends React.Component {
     ]);
 
     application?.signinMethods?.forEach((signinMethod) => {
+      if (signinMethod.rule === "Hide-Password") {
+        return;
+      }
       const item = itemsMap.get(generateItemKey(signinMethod.name, signinMethod.rule));
       if (item) {
         let label = signinMethod.name === signinMethod.displayName ? item.label : signinMethod.displayName;

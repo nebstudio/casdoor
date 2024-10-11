@@ -1050,6 +1050,8 @@ class UserEditPage extends React.Component {
             <MfaAccountTable
               title={i18next.t("user:MFA accounts")}
               table={this.state.user.mfaAccounts}
+              accessToken={this.props.account?.accessToken}
+              icon={this.state.user.avatar}
               onUpdateTable={(table) => {this.updateUserField("mfaAccounts", table);}}
             />
           </Col>

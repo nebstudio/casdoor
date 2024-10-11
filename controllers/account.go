@@ -200,6 +200,10 @@ func (c *ApiController) Signup() {
 		Type:              userType,
 		Password:          authForm.Password,
 		DisplayName:       authForm.Name,
+		Gender:            authForm.Gender,
+		Bio:               authForm.Bio,
+		Tag:               authForm.Tag,
+		Education:         authForm.Education,
 		Avatar:            organization.DefaultAvatar,
 		Email:             authForm.Email,
 		Phone:             authForm.Phone,
@@ -232,6 +236,10 @@ func (c *ApiController) Signup() {
 			user.FirstName = authForm.FirstName
 			user.LastName = authForm.LastName
 		}
+	}
+
+	if invitation != nil && invitation.SignupGroup != "" {
+		user.Groups = []string{invitation.SignupGroup}
 	}
 
 	affected, err := object.AddUser(user)

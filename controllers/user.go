@@ -289,6 +289,16 @@ func (c *ApiController) UpdateUser() {
 		}
 	}
 
+	if user.MfaEmailEnabled && user.Email == "" {
+		c.ResponseError(c.T("user:MFA email is enabled but email is empty"))
+		return
+	}
+
+	if user.MfaPhoneEnabled && user.Phone == "" {
+		c.ResponseError(c.T("user:MFA phone is enabled but phone number is empty"))
+		return
+	}
+
 	if msg := object.CheckUpdateUser(oldUser, &user, c.GetAcceptLanguage()); msg != "" {
 		c.ResponseError(msg)
 		return
@@ -399,6 +409,12 @@ func (c *ApiController) DeleteUser() {
 func (c *ApiController) GetEmailAndPhone() {
 	organization := c.Ctx.Request.Form.Get("organization")
 	username := c.Ctx.Request.Form.Get("username")
+
+	enableErrorMask2 := conf.GetConfigBool("enableErrorMask2")
+	if enableErrorMask2 {
+		c.ResponseError("Error")
+		return
+	}
 
 	user, err := object.GetUserByFields(organization, username)
 	if err != nil {

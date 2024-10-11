@@ -344,7 +344,8 @@ class App extends Component {
         window.location.pathname.startsWith("/cas") ||
         window.location.pathname.startsWith("/select-plan") ||
         window.location.pathname.startsWith("/buy-plan") ||
-        window.location.pathname.startsWith("/qrcode") ;
+        window.location.pathname.startsWith("/qrcode") ||
+        window.location.pathname.startsWith("/captcha");
   }
 
   onClick = ({key}) => {
@@ -361,7 +362,11 @@ class App extends Component {
     if (this.isDoorPages()) {
       return (
         <ConfigProvider theme={{
-          algorithm: Setting.getAlgorithm(["default"]),
+          token: {
+            colorPrimary: this.state.themeData.colorPrimary,
+            borderRadius: this.state.themeData.borderRadius,
+          },
+          algorithm: Setting.getAlgorithm(this.state.themeAlgorithm),
         }}>
           <StyleProvider hashPriority="high" transformers={[legacyLogicalPropertiesTransformer]}>
             <Layout id="parent-area">
@@ -371,6 +376,7 @@ class App extends Component {
                     <EntryPage
                       account={this.state.account}
                       theme={this.state.themeData}
+                      themeAlgorithm={this.state.themeAlgorithm}
                       updateApplication={(application) => {
                         this.setState({
                           application: application,
@@ -445,7 +451,6 @@ class App extends Component {
                 setLogoutState={() => {
                   this.setState({
                     account: null,
-                    themeAlgorithm: ["default"],
                   });
                 }}
               />
