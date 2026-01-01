@@ -14,7 +14,7 @@
 
 import React from "react";
 import {Link} from "react-router-dom";
-import {Button, Select, Tag, Tooltip, message, theme} from "antd";
+import {Select, Tag, Tooltip, message, theme} from "antd";
 import {QuestionCircleTwoTone} from "@ant-design/icons";
 import {isMobile as isMobileDevice} from "react-device-detect";
 import "./i18n";
@@ -25,8 +25,6 @@ import {Helmet} from "react-helmet";
 import * as Conf from "./Conf";
 import * as phoneNumber from "libphonenumber-js";
 import moment from "moment";
-import {MfaAuthVerifyForm, NextMfa, RequiredMfa} from "./auth/mfa/MfaAuthVerifyForm";
-import {EmailMfaType, SmsMfaType, TotpMfaType} from "./auth/MfaSetupPage";
 
 const {Option} = Select;
 
@@ -60,7 +58,6 @@ export const Countries = [
   {label: "فارسی", key: "fa", country: "IR", alt: "فارسی"},
   {label: "Čeština", key: "cs", country: "CZ", alt: "Čeština"},
   {label: "Slovenčina", key: "sk", country: "SK", alt: "Slovenčina"},
-  {label: "Azərbaycan dili", key: "az", country: "AZ", alt: "Azərbaycan dili"},
 ];
 
 export function getThemeData(organization, application) {
@@ -157,7 +154,7 @@ export const OtherProviderInfo = {
       url: "https://control.msg91.com/app/",
     },
     "OSON SMS": {
-      logo: `${StaticBaseUrl}/img/social_osonsms.svg`,
+      logo: "https://osonsms.com/images/osonsms-logo.svg",
       url: "https://osonsms.com/",
     },
     "Custom HTTP SMS": {
@@ -205,7 +202,7 @@ export const OtherProviderInfo = {
       url: "https://aws.amazon.com/s3",
     },
     "MinIO": {
-      logo: `${StaticBaseUrl}/img/social_minio.png`,
+      logo: "https://min.io/resources/img/logo.svg",
       url: "https://min.io/",
     },
     "Aliyun OSS": {
@@ -235,10 +232,6 @@ export const OtherProviderInfo = {
     "Casdoor": {
       logo: `${StaticBaseUrl}/img/casdoor.png`,
       url: "https://casdoor.org/docs/provider/storage/overview",
-    },
-    "CUCloud OSS": {
-      logo: `${StaticBaseUrl}/img/social_cucloud.png`,
-      url: "https://www.cucloud.cn/product/oss.html",
     },
   },
   SAML: {
@@ -280,33 +273,9 @@ export const OtherProviderInfo = {
       logo: `${StaticBaseUrl}/img/social_stripe.png`,
       url: "https://stripe.com/",
     },
-    "AirWallex": {
-      logo: `${StaticBaseUrl}/img/payment_airwallex.svg`,
-      url: "https://airwallex.com/",
-    },
     "GC": {
       logo: `${StaticBaseUrl}/img/payment_gc.png`,
       url: "https://gc.org",
-    },
-    "Polar": {
-      logo: `${StaticBaseUrl}/img/payment_polar.png`,
-      url: "https://polar.sh/",
-    },
-    "Paddle": {
-      logo: `${StaticBaseUrl}/img/payment_paddle.png`,
-      url: "https://www.paddle.com/",
-    },
-    "FastSpring": {
-      logo: `${StaticBaseUrl}/img/payment_fastspring.png`,
-      url: "https://fastspring.com/",
-    },
-    "Lemon Squeezy": {
-      logo: `${StaticBaseUrl}/img/payment_lemonsqueezy.png`,
-      url: "https://www.lemonsqueezy.com/",
-    },
-    "Adyen": {
-      logo: `${StaticBaseUrl}/img/payment_adyen.png`,
-      url: "https://www.adyen.com/",
     },
   },
   Captcha: {
@@ -432,210 +401,8 @@ export const OtherProviderInfo = {
       logo: `${StaticBaseUrl}/img/social_viber.png`,
       url: "https://www.viber.com/",
     },
-    "CUCloud": {
-      logo: `${StaticBaseUrl}/img/cucloud.png`,
-      url: "https://www.cucloud.cn/",
-    },
-    "WeCom": {
-      logo: `${StaticBaseUrl}/img/social_wecom.png`,
-      url: "https://work.weixin.qq.com/",
-    },
-  },
-  "Face ID": {
-    "Alibaba Cloud Facebody": {
-      logo: `${StaticBaseUrl}/img/social_aliyun.png`,
-      url: "https://vision.aliyun.com/facebody",
-    },
-  },
-  "MFA": {
-    "RADIUS": {
-      logo: `${StaticBaseUrl}/img/mfa_radius.png`,
-      url: "",
-    },
-  },
-  "ID Verification": {
-    "Jumio": {
-      logo: `${StaticBaseUrl}/img/social_jumio.png`,
-      url: "https://www.jumio.com/",
-    },
-    "Alibaba Cloud": {
-      logo: `${StaticBaseUrl}/img/social_aliyun.png`,
-      url: "https://www.aliyun.com/product/idverification",
-    },
   },
 };
-
-export const UserFields = ["owner", "name", "password", "display_name", "id", "type", "email", "phone", "country_code",
-  "is_admin", "homepage", "birthday", "gender", "password_type", "password_salt", "external_id", "avatar", "first_name", "last_name",
-  "avatar_type", "permanent_avatar", "email_verified", "region", "location", "address",
-  "affiliation", "title", "id_card_type", "id_card", "real_name", "is_verified", "bio", "tag", "language",
-  "education", "score", "karma", "ranking", "balance", "currency", "is_default_avatar", "is_online",
-  "is_forbidden", "is_deleted", "signup_application", "hash", "pre_hash", "access_key", "access_secret", "access_token",
-  "created_ip", "last_signin_time", "last_signin_ip", "github", "google", "qq", "wechat", "facebook", "dingtalk",
-  "weibo", "gitee", "linkedin", "wecom", "lark", "gitlab", "adfs", "baidu", "alipay", "casdoor", "infoflow", "apple",
-  "azuread", "azureadb2c", "slack", "steam", "bilibili", "okta", "douyin", "kwai", "line", "amazon", "auth0",
-  "battlenet", "bitbucket", "box", "cloudfoundry", "dailymotion", "deezer", "digitalocean", "discord", "dropbox",
-  "eveonline", "fitbit", "gitea", "heroku", "influxcloud", "instagram", "intercom", "kakao", "lastfm", "mailru",
-  "meetup", "microsoftonline", "naver", "nextcloud", "onedrive", "oura", "patreon", "paypal", "salesforce", "shopify",
-  "soundcloud", "spotify", "strava", "stripe", "tiktok", "tumblr", "twitch", "twitter", "typetalk", "uber", "vk",
-  "wepay", "xero", "yahoo", "yammer", "yandex", "zoom", "metamask", "web3onboard", "custom", "webauthnCredentials",
-  "preferred_mfa_type", "recovery_codes", "totp_secret", "mfa_phone_enabled", "mfa_email_enabled", "invitation",
-  "invitation_code", "face_ids", "ldap", "properties", "roles", "permissions", "groups", "last_change_password_time",
-  "last_signin_wrong_time", "signin_wrong_times", "managedAccounts", "mfaAccounts", "need_update_password",
-  "created_time", "updated_time", "deleted_time",
-  "ip_whitelist"];
-
-export const GroupFields = ["owner", "name", "created_time", "updated_time", "display_name", "manager",
-  "contact_email", "type", "parent_id", "is_top_group", "is_enabled"];
-
-export const RoleFields = ["owner", "name", "created_time", "display_name", "description",
-  "users", "groups", "roles", "domains", "is_enabled"];
-
-export const PermissionFields = ["owner", "name", "created_time", "display_name", "description",
-  "users", "groups", "roles", "domains", "model", "adapter", "resource_type",
-  "resources", "actions", "effect", "is_enabled", "submitter", "approver", "approve_time", "state"];
-
-export const GetTranslatedUserItems = () => {
-  return [
-    {name: "Organization", label: i18next.t("general:Organization")},
-    {name: "ID", label: i18next.t("general:ID")},
-    {name: "Name", label: i18next.t("general:Name")},
-    {name: "Display name", label: i18next.t("general:Display name")},
-    {name: "First name", label: i18next.t("general:First name")},
-    {name: "Last name", label: i18next.t("general:Last name")},
-    {name: "Avatar", label: i18next.t("general:Avatar")},
-    {name: "User type", label: i18next.t("general:User type")},
-    {name: "Password", label: i18next.t("general:Password")},
-    {name: "Email", label: i18next.t("general:Email")},
-    {name: "Phone", label: i18next.t("general:Phone")},
-    {name: "Country code", label: i18next.t("user:Country code")},
-    {name: "Country/Region", label: i18next.t("user:Country/Region")},
-    {name: "Location", label: i18next.t("user:Location")},
-    {name: "Address", label: i18next.t("user:Address")},
-    {name: "Affiliation", label: i18next.t("user:Affiliation")},
-    {name: "Title", label: i18next.t("user:Title")},
-    {name: "ID card type", label: i18next.t("user:ID card type")},
-    {name: "ID card", label: i18next.t("user:ID card")},
-    {name: "ID card info", label: i18next.t("user:ID card info")},
-    {name: "Homepage", label: i18next.t("user:Homepage")},
-    {name: "Bio", label: i18next.t("user:Bio")},
-    {name: "Tag", label: i18next.t("user:Tag")},
-    {name: "Language", label: i18next.t("user:Language")},
-    {name: "Gender", label: i18next.t("user:Gender")},
-    {name: "Birthday", label: i18next.t("user:Birthday")},
-    {name: "Education", label: i18next.t("user:Education")},
-    {name: "Balance", label: i18next.t("user:Balance")},
-    {name: "Balance currency", label: i18next.t("organization:Balance currency")},
-    {name: "Balance credit", label: i18next.t("organization:Balance credit")},
-    {name: "Transactions", label: i18next.t("transaction:Transactions")},
-    {name: "Score", label: i18next.t("user:Score")},
-    {name: "Karma", label: i18next.t("user:Karma")},
-    {name: "Ranking", label: i18next.t("user:Ranking")},
-    {name: "Signup application", label: i18next.t("general:Signup application")},
-    {name: "API key", label: i18next.t("general:API key")},
-    {name: "Groups", label: i18next.t("general:Groups")},
-    {name: "Roles", label: i18next.t("general:Roles")},
-    {name: "Permissions", label: i18next.t("general:Permissions")},
-    {name: "3rd-party logins", label: i18next.t("user:3rd-party logins")},
-    {name: "Properties", label: i18next.t("user:Properties")},
-    {name: "Is online", label: i18next.t("user:Is online")},
-    {name: "Is admin", label: i18next.t("user:Is admin")},
-    {name: "Is forbidden", label: i18next.t("user:Is forbidden")},
-    {name: "Is deleted", label: i18next.t("user:Is deleted")},
-    {name: "Need update password", label: i18next.t("user:Need update password")},
-    {name: "IP whitelist", label: i18next.t("general:IP whitelist")},
-    {name: "Multi-factor authentication", label: i18next.t("user:Multi-factor authentication")},
-    {name: "WebAuthn credentials", label: i18next.t("user:WebAuthn credentials")},
-    {name: "Managed accounts", label: i18next.t("user:Managed accounts")},
-    {name: "Face ID", label: i18next.t("user:Face ID")},
-    {name: "MFA accounts", label: i18next.t("user:MFA accounts")},
-    {name: "MFA items", label: i18next.t("general:MFA items")},
-  ];
-};
-
-export function getUserColumns() {
-  const items = GetTranslatedUserItems();
-  return UserFields.map(field => {
-    let transField = "";
-    if (field === "webauthnCredentials") {
-      transField = "WebAuthn credentials";
-    } else if (field === "region") {
-      transField = "Country/Region";
-    } else if (field === "mfaAccounts") {
-      transField = "MFA accounts";
-    } else if (field === "face_ids") {
-      transField = "Face ID";
-    } else if (field === "managedAccounts") {
-      transField = "Managed accounts";
-    } else {
-      transField = field.toLowerCase().split("_").join(" ");
-      transField = transField.charAt(0).toUpperCase() + transField.slice(1);
-      transField = transField.replace("ip", "IP")
-        .replace("Ip", "IP")
-        .replace("Id", "ID")
-        .replace("id", "ID");
-    }
-    if (transField === "Owner") {
-      transField = "Organization";
-    }
-    const transFieldItem = items.find(item => item.name === transField);
-    if (transFieldItem === undefined) {
-      const toTranslateList = ["general", "user", "organization"].map(ns => `${ns}:${transField}`);
-      const transResult = toTranslateList.map(item => i18next.t(item) === transField ? null : i18next.t(item))
-        .find(item => item !== null);
-      transField = transResult ? transResult : transField;
-    }
-    return `${transFieldItem ? transFieldItem.label : transField}#${field}`;
-  });
-}
-
-export function getGroupColumns() {
-  return GroupFields.map(field => {
-    let transField = field.toLowerCase().split("_").join(" ");
-    transField = transField.charAt(0).toUpperCase() + transField.slice(1);
-    transField = transField.replace("Id", "ID");
-    if (transField === "Owner") {
-      transField = "Organization";
-    }
-    const toTranslateList = ["general", "group"].map(ns => `${ns}:${transField}`);
-    const transResult = toTranslateList.map(item => i18next.t(item) === transField ? null : i18next.t(item))
-      .find(item => item !== null);
-    transField = transResult ? transResult : transField;
-    return `${transField}#${field}`;
-  });
-}
-
-export function getRoleColumns() {
-  return RoleFields.map(field => {
-    let transField = field.toLowerCase().split("_").join(" ");
-    transField = transField.charAt(0).toUpperCase() + transField.slice(1);
-    transField = transField.replace("Id", "ID");
-    if (transField === "Owner") {
-      transField = "Organization";
-    }
-    const toTranslateList = ["general", "role"].map(ns => `${ns}:${transField}`);
-    const transResult = toTranslateList.map(item => i18next.t(item) === transField ? null : i18next.t(item))
-      .find(item => item !== null);
-    transField = transResult ? transResult : transField;
-    return `${transField}#${field}`;
-  });
-}
-
-export function getPermissionColumns() {
-  return PermissionFields.map(field => {
-    let transField = field.toLowerCase().split("_").join(" ");
-    transField = transField.charAt(0).toUpperCase() + transField.slice(1);
-    transField = transField.replace("Id", "ID");
-    if (transField === "Owner") {
-      transField = "Organization";
-    }
-    const toTranslateList = ["general", "permission"].map(ns => `${ns}:${transField}`);
-    const transResult = toTranslateList.map(item => i18next.t(item) === transField ? null : i18next.t(item))
-      .find(item => item !== null);
-    transField = transResult ? transResult : transField;
-    return `${transField}#${field}`;
-  });
-}
 
 export function initCountries() {
   const countries = require("i18n-iso-countries");
@@ -909,27 +676,18 @@ export const MfaRulePrompted = "Prompted";
 export const MfaRuleOptional = "Optional";
 
 export function isRequiredEnableMfa(user, organization) {
-  if (!user || !organization || (!organization.mfaItems && !user.mfaItems)) {
+  if (!user || !organization || !organization.mfaItems) {
     return false;
   }
   return getMfaItemsByRules(user, organization, [MfaRuleRequired]).length > 0;
 }
 
 export function getMfaItemsByRules(user, organization, mfaRules = []) {
-  if (!user || !organization || (!organization.mfaItems && !user.mfaItems)) {
+  if (!user || !organization || !organization.mfaItems) {
     return [];
   }
 
-  let mfaItems = organization.mfaItems;
-  if (user.mfaItems && user.mfaItems.length !== 0) {
-    mfaItems = user.mfaItems;
-  }
-
-  if (mfaItems === null) {
-    return [];
-  }
-
-  return mfaItems.filter((mfaItem) => mfaRules.includes(mfaItem.rule))
+  return organization.mfaItems.filter((mfaItem) => mfaRules.includes(mfaItem.rule))
     .filter((mfaItem) => user.multiFactorAuths.some((mfa) => mfa.mfaType === mfaItem.name && !mfa.enabled));
 }
 
@@ -1162,7 +920,7 @@ export function getClickable(text) {
   return (
     <a onClick={() => {
       copy(text);
-      showMessage("success", i18next.t("general:Copied to clipboard successfully"));
+      showMessage("success", "Copied to clipboard");
     }}>
       {text}
     </a>
@@ -1170,12 +928,11 @@ export function getClickable(text) {
 }
 
 export function getProviderLogoURL(provider) {
-  if (provider.type.startsWith("Custom") && provider.customLogo) {
+  if (provider.type === "Custom" && provider.customLogo) {
     return provider.customLogo;
   }
   if (provider.category === "OAuth") {
-    const type = provider.type.startsWith("Custom") ? "Custom" : provider.type;
-    return `${StaticBaseUrl}/img/social_${type.toLowerCase()}.png`;
+    return `${StaticBaseUrl}/img/social_${provider.type.toLowerCase()}.png`;
   } else {
     const info = OtherProviderInfo[provider.category][provider.type];
     // avoid crash when provider is not found
@@ -1224,7 +981,6 @@ export function getProviderTypeOptions(category) {
         {id: "Bilibili", name: "Bilibili"},
         {id: "Okta", name: "Okta"},
         {id: "Douyin", name: "Douyin"},
-        {id: "Kwai", name: "Kwai"},
         {id: "Line", name: "Line"},
         {id: "Amazon", name: "Amazon"},
         {id: "Auth0", name: "Auth0"},
@@ -1261,7 +1017,6 @@ export function getProviderTypeOptions(category) {
         {id: "Spotify", name: "Spotify"},
         {id: "Strava", name: "Strava"},
         {id: "Stripe", name: "Stripe"},
-        {id: "Telegram", name: "Telegram"},
         {id: "TikTok", name: "TikTok"},
         {id: "Tumblr", name: "Tumblr"},
         {id: "Twitch", name: "Twitch"},
@@ -1276,15 +1031,6 @@ export function getProviderTypeOptions(category) {
         {id: "Yandex", name: "Yandex"},
         {id: "Zoom", name: "Zoom"},
         {id: "Custom", name: "Custom"},
-        {id: "Custom2", name: "Custom2"},
-        {id: "Custom3", name: "Custom3"},
-        {id: "Custom4", name: "Custom4"},
-        {id: "Custom5", name: "Custom5"},
-        {id: "Custom6", name: "Custom6"},
-        {id: "Custom7", name: "Custom7"},
-        {id: "Custom8", name: "Custom8"},
-        {id: "Custom9", name: "Custom9"},
-        {id: "Custom10", name: "Custom10"},
       ]
     );
   } else if (category === "Email") {
@@ -1332,7 +1078,6 @@ export function getProviderTypeOptions(category) {
         {id: "Google Cloud Storage", name: "Google Cloud Storage"},
         {id: "Synology", name: "Synology"},
         {id: "Casdoor", name: "Casdoor"},
-        {id: "CUCloud OSS", name: "CUCloud OSS"},
       ]
     );
   } else if (category === "SAML") {
@@ -1349,13 +1094,7 @@ export function getProviderTypeOptions(category) {
       {id: "WeChat Pay", name: "WeChat Pay"},
       {id: "PayPal", name: "PayPal"},
       {id: "Stripe", name: "Stripe"},
-      {id: "AirWallex", name: "AirWallex"},
       {id: "GC", name: "GC"},
-      {id: "Polar", name: "Polar"},
-      {id: "Paddle", name: "Paddle"},
-      {id: "FastSpring", name: "FastSpring"},
-      {id: "Lemon Squeezy", name: "Lemon Squeezy"},
-      {id: "Adyen", name: "Adyen"},
     ]);
   } else if (category === "Captcha") {
     return ([
@@ -1392,21 +1131,6 @@ export function getProviderTypeOptions(category) {
       {id: "Reddit", name: "Reddit"},
       {id: "Rocket Chat", name: "Rocket Chat"},
       {id: "Viber", name: "Viber"},
-      {id: "CUCloud", name: "CUCloud"},
-      {id: "WeCom", name: "WeCom"},
-    ]);
-  } else if (category === "Face ID") {
-    return ([
-      {id: "Alibaba Cloud Facebody", name: "Alibaba Cloud Facebody"},
-    ]);
-  } else if (category === "MFA") {
-    return ([
-      {id: "RADIUS", name: "RADIUS"},
-    ]);
-  } else if (category === "ID Verification") {
-    return ([
-      {id: "Jumio", name: "Jumio"},
-      {id: "Alibaba Cloud", name: "Alibaba Cloud"},
     ]);
   } else {
     return [];
@@ -1447,7 +1171,7 @@ export function renderLogo(application) {
 
 function isSigninMethodEnabled(application, signinMethod) {
   if (application && application.signinMethods) {
-    return application.signinMethods.filter(item => item.name === signinMethod && item.rule !== "Hide password").length > 0;
+    return application.signinMethods.filter(item => item.name === signinMethod && item.rule !== "Hide-Password").length > 0;
   } else {
     return false;
   }
@@ -1535,9 +1259,6 @@ export function renderSignupLink(application, text) {
   } else {
     if (application.signupUrl === "") {
       url = `/signup/${application.name}`;
-      if (application.isShared) {
-        url = `/signup/${application.name}-org-${application.organization}`;
-      }
     } else {
       url = application.signupUrl;
     }
@@ -1576,14 +1297,10 @@ export function renderHelmet(application) {
     return null;
   }
 
-  // Application's title and favicon have higher priority than organization's values
-  const title = application.title || application.organizationObj.displayName;
-  const favicon = application.favicon || application.organizationObj.favicon;
-
   return (
     <Helmet>
-      <title>{title}</title>
-      <link rel="icon" href={favicon} />
+      <title>{application.organizationObj.displayName}</title>
+      <link rel="icon" href={application.organizationObj.favicon} />
     </Helmet>
   );
 }
@@ -1668,13 +1385,7 @@ export function getTag(color, text, icon) {
 }
 
 export function getApplicationName(application) {
-  let name = `${application?.owner}/${application?.name}`;
-
-  if (application?.isShared && application?.organization) {
-    name += `-org-${application.organization}`;
-  }
-
-  return name;
+  return `${application?.owner}/${application?.name}`;
 }
 
 export function getApplicationDisplayName(application) {
@@ -1757,142 +1468,14 @@ export function builtInObject(obj) {
   return obj.owner === "built-in" && BuiltInObjects.includes(obj.name);
 }
 
-export const CurrencyOptions = [
-  {id: "USD", name: "USD"},
-  {id: "CNY", name: "CNY"},
-  {id: "EUR", name: "EUR"},
-  {id: "JPY", name: "JPY"},
-  {id: "GBP", name: "GBP"},
-  {id: "AUD", name: "AUD"},
-  {id: "CAD", name: "CAD"},
-  {id: "CHF", name: "CHF"},
-  {id: "HKD", name: "HKD"},
-  {id: "SGD", name: "SGD"},
-  {id: "BRL", name: "BRL"},
-  {id: "PLN", name: "PLN"},
-  {id: "KRW", name: "KRW"},
-  {id: "INR", name: "INR"},
-  {id: "RUB", name: "RUB"},
-  {id: "MXN", name: "MXN"},
-  {id: "ZAR", name: "ZAR"},
-  {id: "TRY", name: "TRY"},
-  {id: "SEK", name: "SEK"},
-  {id: "NOK", name: "NOK"},
-  {id: "DKK", name: "DKK"},
-  {id: "THB", name: "THB"},
-  {id: "MYR", name: "MYR"},
-  {id: "TWD", name: "TWD"},
-  {id: "CZK", name: "CZK"},
-  {id: "HUF", name: "HUF"},
-];
-
 export function getCurrencySymbol(currency) {
   if (currency === "USD" || currency === "usd") {
     return "$";
   } else if (currency === "CNY" || currency === "cny") {
     return "¥";
-  } else if (currency === "EUR" || currency === "eur") {
-    return "€";
-  } else if (currency === "JPY" || currency === "jpy") {
-    return "¥";
-  } else if (currency === "GBP" || currency === "gbp") {
-    return "£";
-  } else if (currency === "AUD" || currency === "aud") {
-    return "A$";
-  } else if (currency === "CAD" || currency === "cad") {
-    return "C$";
-  } else if (currency === "CHF" || currency === "chf") {
-    return "CHF";
-  } else if (currency === "HKD" || currency === "hkd") {
-    return "HK$";
-  } else if (currency === "SGD" || currency === "sgd") {
-    return "S$";
-  } else if (currency === "BRL" || currency === "brl") {
-    return "R$";
-  } else if (currency === "PLN" || currency === "pln") {
-    return "zł";
-  } else if (currency === "KRW" || currency === "krw") {
-    return "₩";
-  } else if (currency === "INR" || currency === "inr") {
-    return "₹";
-  } else if (currency === "RUB" || currency === "rub") {
-    return "₽";
-  } else if (currency === "MXN" || currency === "mxn") {
-    return "$";
-  } else if (currency === "ZAR" || currency === "zar") {
-    return "R";
-  } else if (currency === "TRY" || currency === "try") {
-    return "₺";
-  } else if (currency === "SEK" || currency === "sek") {
-    return "kr";
-  } else if (currency === "NOK" || currency === "nok") {
-    return "kr";
-  } else if (currency === "DKK" || currency === "dkk") {
-    return "kr";
-  } else if (currency === "THB" || currency === "thb") {
-    return "฿";
-  } else if (currency === "MYR" || currency === "myr") {
-    return "RM";
-  } else if (currency === "TWD" || currency === "twd") {
-    return "NT$";
-  } else if (currency === "CZK" || currency === "czk") {
-    return "Kč";
-  } else if (currency === "HUF" || currency === "huf") {
-    return "Ft";
   } else {
     return currency;
   }
-}
-
-export function getCurrencyCountryCode(currency) {
-  const currencyToCountry = {
-    USD: "US",
-    CNY: "CN",
-    EUR: "EU",
-    JPY: "JP",
-    GBP: "GB",
-    AUD: "AU",
-    CAD: "CA",
-    CHF: "CH",
-    HKD: "HK",
-    SGD: "SG",
-    BRL: "BR",
-    PLN: "PL",
-    KRW: "KR",
-    INR: "IN",
-    RUB: "RU",
-    MXN: "MX",
-    ZAR: "ZA",
-    TRY: "TR",
-    SEK: "SE",
-    NOK: "NO",
-    DKK: "DK",
-    THB: "TH",
-    MYR: "MY",
-    TWD: "TW",
-    CZK: "CZ",
-    HUF: "HU",
-  };
-
-  return currencyToCountry[currency?.toUpperCase()] || null;
-}
-
-export function getCurrencyWithFlag(currency) {
-  const translationKey = `currency:${currency}`;
-  const translatedText = i18next.t(translationKey);
-  const currencyText = translatedText === translationKey ? currency : translatedText;
-
-  const countryCode = getCurrencyCountryCode(currency);
-  if (!countryCode) {
-    return currencyText;
-  }
-
-  return (
-    <span>
-      <img src={`${StaticBaseUrl}/flag-icons/${countryCode}.svg`} alt={`${currency} flag`} height={20} style={{marginRight: 5}} />
-      {currencyText}
-    </span>
-  );
 }
 
 export function getFriendlyUserName(account) {
@@ -1907,25 +1490,15 @@ export function getFriendlyUserName(account) {
   }
 }
 
-export function isAnonymousUserName(userName) {
-  if (!userName) {
-    return false;
-  }
-
-  return /^u-[0-9a-f]{8}$/i.test(userName);
-}
-
 export function getUserCommonFields() {
-  return ["Owner", "Name", "CreatedTime", "UpdatedTime", "DeletedTime", "Id", "ExternalId", "Type", "Password", "PasswordSalt", "PasswordType", "DisplayName", "FirstName", "LastName", "Avatar", "AvatarType", "PermanentAvatar",
-    "Email", "EmailVerified", "Phone", "CountryCode", "Location", "Address", "Affiliation", "Title", "IdCardType", "IdCard", "RealName", "IsVerified", "Homepage", "Bio", "Tag", "Region",
-    "Language", "Gender", "Birthday", "Education", "Score", "Karma", "Ranking", "Balance", "BalanceCredit", "Currency", "BalanceCurrency", "IsDefaultAvatar", "IsOnline", "IsAdmin", "IsForbidden", "IsDeleted",
-    "SignupApplication", "RegisterType", "RegisterSource", "CreatedIp", "LastSigninTime", "LastSigninIp",
-    "PreferredMfaType", "TotpSecret", "RecoveryCodes", "MfaPhoneEnabled", "MfaEmailEnabled", "MfaRadiusEnabled", "MfaRadiusUsername", "MfaRadiusProvider", "MfaPushEnabled", "MfaPushReceiver", "MfaPushProvider",
-    "WebauthnCredentials", "FaceIds", "Invitation", "InvitationCode", "Ldap", "Properties", "Groups"];
+  return ["Owner", "Name", "CreatedTime", "UpdatedTime", "DeletedTime", "Id", "Type", "Password", "PasswordSalt", "DisplayName", "FirstName", "LastName", "Avatar", "PermanentAvatar",
+    "Email", "EmailVerified", "Phone", "Location", "Address", "Affiliation", "Title", "IdCardType", "IdCard", "Homepage", "Bio", "Tag", "Region",
+    "Language", "Gender", "Birthday", "Education", "Score", "Ranking", "IsDefaultAvatar", "IsOnline", "IsAdmin", "IsForbidden", "IsDeleted", "CreatedIp",
+    "PreferredMfaType", "TotpSecret", "SignupApplication", "RecoveryCodes", "MfaPhoneEnabled", "MfaEmailEnabled"];
 }
 
 export function getDefaultFooterContent() {
-  return `Powered by <a target="_blank" href="https://casdoor.org" rel="noreferrer"><img style="padding-bottom: 3px" height="20" alt="Casdoor" src="${StaticBaseUrl}/img/casdoor-logo_1185x256.png"/></a>`;
+  return "<small> 星芸网络统一认证平台  © 2023-2024 版权所有 | <a href=\"https://beian.miit.gov.cn\" rel=\"nofollow\" style=\"color: #666; text-decoration: none;\" target=\"_blank\">鲁ICP备2022041583号-1</a> 经营许可备 <a href=\"https://www.beian.gov.cn\" rel=\"nofollow\" style=\"color: #666; text-decoration: none;\" target=\"_blank\">鲁B2-20231062</a></small>";
 }
 
 export function getEmptyFooterContent() {
@@ -1957,60 +1530,13 @@ export function getDefaultHtmlEmailContent() {
 <div class="email-container">
   <div class="header">
         <h3>Casbin Organization</h3>
-        <img src="${StaticBaseUrl}/img/casdoor-logo_1185x256.png" alt="Casdoor Logo" width="300">
+        <img src="https://cdn.casbin.org/img/casdoor-logo_1185x256.png" alt="Casdoor Logo" width="300">
     </div>
     <p><strong>%{user.friendlyName}</strong>, here is your verification code</p>
     <p>Use this code for your transaction. It's valid for 5 minutes</p>
     <div class="code">
         %s
     </div>
-    <reset-link>
-      <div class="link">
-         Or click this <a href="%link">link</a> to reset
-      </div>
-    </reset-link>
-    <p>Thanks</p>
-    <p>Casbin Team</p>
-    <hr>
-    <div class="footer">
-        <p>Casdoor is a brand operated by Casbin organization. For more info please refer to <a href="https://casdoor.org">https://casdoor.org</a></p>
-    </div>
-</div>
-</body>
-</html>`;
-}
-
-export function getDefaultInvitationHtmlEmailContent() {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitation Code Email</title>
-<style>
-    body { font-family: Arial, sans-serif; }
-    .email-container { width: 600px; margin: 0 auto; }
-    .header { text-align: center; }
-    .code { font-size: 24px; margin: 20px 0; text-align: center; }
-    .footer { font-size: 12px; text-align: center; margin-top: 50px; }
-    .footer a { color: #000; text-decoration: none; }
-</style>
-</head>
-<body>
-<div class="email-container">
-  <div class="header">
-        <h3>Casbin Organization</h3>
-        <img src="${StaticBaseUrl}/img/casdoor-logo_1185x256.png" alt="Casdoor Logo" width="300">
-    </div>
-    <p>You have been invited into Casdoor</p>
-    <div class="code">
-        %code
-    </div>
-    <reset-link>
-      <div class="link">
-         Or click this <a href="%link">link</a> to signup
-      </div>
-    </reset-link>
     <p>Thanks</p>
     <p>Casbin Team</p>
     <hr>
@@ -2024,57 +1550,9 @@ export function getDefaultInvitationHtmlEmailContent() {
 
 export function getCurrencyText(product) {
   if (product?.currency === "USD") {
-    return i18next.t("currency:USD");
+    return i18next.t("product:USD");
   } else if (product?.currency === "CNY") {
-    return i18next.t("currency:CNY");
-  } else if (product?.currency === "EUR") {
-    return i18next.t("currency:EUR");
-  } else if (product?.currency === "JPY") {
-    return i18next.t("currency:JPY");
-  } else if (product?.currency === "GBP") {
-    return i18next.t("currency:GBP");
-  } else if (product?.currency === "AUD") {
-    return i18next.t("currency:AUD");
-  } else if (product?.currency === "CAD") {
-    return i18next.t("currency:CAD");
-  } else if (product?.currency === "CHF") {
-    return i18next.t("currency:CHF");
-  } else if (product?.currency === "HKD") {
-    return i18next.t("currency:HKD");
-  } else if (product?.currency === "SGD") {
-    return i18next.t("currency:SGD");
-  } else if (product?.currency === "BRL") {
-    return i18next.t("currency:BRL");
-  } else if (product?.currency === "PLN") {
-    return i18next.t("currency:PLN");
-  } else if (product?.currency === "KRW") {
-    return i18next.t("currency:KRW");
-  } else if (product?.currency === "INR") {
-    return i18next.t("currency:INR");
-  } else if (product?.currency === "RUB") {
-    return i18next.t("currency:RUB");
-  } else if (product?.currency === "MXN") {
-    return i18next.t("currency:MXN");
-  } else if (product?.currency === "ZAR") {
-    return i18next.t("currency:ZAR");
-  } else if (product?.currency === "TRY") {
-    return i18next.t("currency:TRY");
-  } else if (product?.currency === "SEK") {
-    return i18next.t("currency:SEK");
-  } else if (product?.currency === "NOK") {
-    return i18next.t("currency:NOK");
-  } else if (product?.currency === "DKK") {
-    return i18next.t("currency:DKK");
-  } else if (product?.currency === "THB") {
-    return i18next.t("currency:THB");
-  } else if (product?.currency === "MYR") {
-    return i18next.t("currency:MYR");
-  } else if (product?.currency === "TWD") {
-    return i18next.t("currency:TWD");
-  } else if (product?.currency === "CZK") {
-    return i18next.t("currency:CZK");
-  } else if (product?.currency === "HUF") {
-    return i18next.t("currency:HUF");
+    return i18next.t("product:CNY");
   } else {
     return "(Unknown currency)";
   }
@@ -2082,246 +1560,4 @@ export function getCurrencyText(product) {
 
 export function isDarkTheme(themeAlgorithm) {
   return themeAlgorithm && themeAlgorithm.includes("dark");
-}
-
-function getPreferredMfaProp(mfaProps) {
-  for (const i in mfaProps) {
-    if (mfaProps[i].isPreferred) {
-      return mfaProps[i];
-    }
-  }
-  return mfaProps[0];
-}
-
-export function checkLoginMfa(res, body, params, handleLogin, componentThis, requireRedirect = null) {
-  if (res.data === RequiredMfa) {
-    if (!requireRedirect) {
-      componentThis.props.onLoginSuccess(window.location.href);
-    } else {
-      componentThis.props.onLoginSuccess(requireRedirect);
-    }
-  } else if (res.data === NextMfa) {
-    componentThis.setState({
-      mfaProps: res.data2,
-      selectedMfaProp: getPreferredMfaProp(res.data2),
-    }, () => {
-      body["providerBack"] = body["provider"];
-      body["provider"] = "";
-      componentThis.setState({
-        getVerifyTotp: () => renderMfaAuthVerifyForm(body, params, handleLogin, componentThis),
-      });
-    });
-  } else if (res.data === "SelectPlan") {
-    // paid-user does not have active or pending subscription, go to application default pricing page to select-plan
-    const pricing = res.data2;
-    goToLink(`/select-plan/${pricing.owner}/${pricing.name}?user=${body.username}`);
-  } else if (res.data === "BuyPlanResult") {
-    // paid-user has pending subscription, go to buy-plan/result apge to notify payment result
-    const sub = res.data2;
-    goToLink(`/buy-plan/${sub.owner}/${sub.pricing}/result?subscription=${sub.name}`);
-  } else {
-    handleLogin(res);
-  }
-}
-
-export function getApplicationObj(componentThis) {
-  return componentThis.props.application;
-}
-
-export function parseOffset(offset) {
-  if (offset === 2 || offset === 4 || inIframe() || isMobile()) {
-    return "0 auto";
-  }
-  if (offset === 1) {
-    return "0 10%";
-  }
-  if (offset === 3) {
-    return "0 60%";
-  }
-}
-
-function renderMfaAuthVerifyForm(values, authParams, onSuccess, componentThis) {
-  return (
-    <div>
-      <MfaAuthVerifyForm
-        mfaProps={componentThis.state.selectedMfaProp}
-        formValues={values}
-        authParams={authParams}
-        application={getApplicationObj(componentThis)}
-        onFail={(errorMessage) => {
-          showMessage("error", errorMessage);
-        }}
-        onSuccess={(res) => onSuccess(res)}
-      />
-      <div>
-        {
-          componentThis.state.mfaProps.map((mfa) => {
-            if (componentThis.state.selectedMfaProp.mfaType === mfa.mfaType) {return null;}
-            let mfaI18n = "";
-            switch (mfa.mfaType) {
-            case SmsMfaType: mfaI18n = i18next.t("mfa:Use SMS"); break;
-            case TotpMfaType: mfaI18n = i18next.t("mfa:Use Authenticator App"); break ;
-            case EmailMfaType: mfaI18n = i18next.t("mfa:Use Email") ;break;
-            }
-            return <div key={mfa.mfaType}><Button type={"link"} onClick={() => {
-              componentThis.setState({
-                selectedMfaProp: mfa,
-              });
-            }}>{mfaI18n}</Button></div>;
-          })
-        }
-      </div>
-    </div>);
-}
-
-export function renderLoginPanel(application, getInnerComponent, componentThis) {
-  return (
-    <div className="login-content" style={{margin: componentThis.props.preview ?? parseOffset(application.formOffset)}}>
-      {inIframe() || isMobile() ? null : <div dangerouslySetInnerHTML={{__html: application.formCss}} />}
-      {inIframe() || !isMobile() ? null : <div dangerouslySetInnerHTML={{__html: application.formCssMobile}} />}
-      <div className={isDarkTheme(componentThis.props.themeAlgorithm) ? "login-panel-dark" : "login-panel"}>
-        <div className="side-image" style={{display: application.formOffset !== 4 ? "none" : null}}>
-          <div dangerouslySetInnerHTML={{__html: application.formSideHtml}} />
-        </div>
-        <div className="login-form">
-          <div>
-            {
-              getInnerComponent()
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function createFormAndSubmit(url, params) {
-  const form = document.createElement("form");
-  form.method = "post";
-  form.action = url;
-
-  for (const k in params) {
-    if (!params[k]) {
-      continue;
-    }
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = k;
-    input.value = params[k];
-    form.appendChild(input);
-  }
-
-  document.body.appendChild(form);
-  form.submit();
-  setTimeout(() => {form.remove();}, 500);
-}
-
-export function getFormTypeOptions() {
-  return [
-    {id: "users", name: "general:Users"},
-    {id: "providers", name: "general:Providers"},
-    {id: "applications", name: "general:Applications"},
-    {id: "organizations", name: "general:Organizations"},
-  ];
-}
-
-export function getFormTypeItems(formType) {
-  if (formType === "users") {
-    return [
-      {name: "owner", label: "general:Organization", visible: true, width: "150"},
-      {name: "signupApplication", label: "general:Application", visible: true, width: "120"},
-      {name: "name", label: "general:Name", visible: true, width: "110"},
-      {name: "createdTime", label: "general:Created time", visible: true, width: "160"},
-      {name: "displayName", label: "general:Display name", visible: true, width: "150"},
-      {name: "avatar", label: "general:Avatar", visible: true, width: "80"},
-      {name: "email", label: "general:Email", visible: true, width: "160"},
-      {name: "phone", label: "general:Phone", visible: true, width: "120"},
-      {name: "affiliation", label: "user:Affiliation", visible: true, width: "140"},
-      {name: "region", label: "user:Country/Region", visible: true, width: "140"},
-      {name: "type", label: "general:User type", visible: true, width: "120"},
-      {name: "tag", label: "user:Tag", visible: true, width: "110"},
-      {name: "isAdmin", label: "user:Is admin", visible: true, width: "120"},
-      {name: "isForbidden", label: "user:Is forbidden", visible: true, width: "110"},
-      {name: "isDeleted", label: "user:Is deleted", visible: true, width: "110"},
-    ];
-  } else if (formType === "providers") {
-    return [
-      {name: "name", label: "general:Name", visible: true, width: "120"},
-      {name: "owner", label: "general:Organization", visible: true, width: "150"},
-      {name: "createdTime", label: "general:Created time", visible: true, width: "180"},
-      {name: "displayName", label: "general:Display name", visible: true, width: "150"},
-      {name: "category", label: "provider:Category", visible: true, width: "110"},
-      {name: "type", label: "provider:Type", visible: true, width: "110"},
-      {name: "clientId", label: "provider:Client ID", visible: true, width: "100"},
-      {name: "providerUrl", label: "provider:Provider URL", visible: true, width: "150"},
-    ];
-  } else if (formType === "applications") {
-    return [
-      {name: "name", label: "general:Name", visible: true, width: "150"},
-      {name: "createdTime", label: "general:Created time", visible: true, width: "160"},
-      {name: "displayName", label: "general:Display name", visible: true, width: "150"},
-      {name: "logo", label: "Logo", visible: true, width: "200"},
-      {name: "organization", label: "general:Organization", visible: true, width: "150"},
-      {name: "providers", label: "general:Providers", visible: true, width: "500"},
-    ];
-  } else if (formType === "organizations") {
-    return [
-      {name: "name", label: "general:Name", visible: true, width: "120"},
-      {name: "createdTime", label: "general:Created time", visible: true, width: "160"},
-      {name: "displayName", label: "general:Display name", visible: true, width: "150"},
-      {name: "favicon", label: "general:Favicon", visible: true, width: "50"},
-      {name: "websiteUrl", label: "organization:Website URL", visible: true, width: "200"},
-      {name: "passwordType", label: "general:Password type", visible: true, width: "150"},
-      {name: "passwordSalt", label: "general:Password salt", visible: true, width: "150"},
-      {name: "defaultAvatar", label: "general:Default avatar", visible: true, width: "120"},
-      {name: "enableSoftDeletion", label: "organization:Soft deletion", visible: true, width: "140"},
-    ];
-  } else {
-    return [];
-  }
-}
-
-export function filterTableColumns(columns, formItems, actionKey = "op") {
-  if (!formItems || formItems.length === 0) {
-    return columns;
-  }
-  const visibleColumns = formItems
-    .filter(item => item.visible !== false)
-    .map(item => {
-      const matchedColumn = columns.find(col => col.key === item.name);
-
-      if (matchedColumn) {
-        return {
-          ...matchedColumn,
-          width: item.width !== undefined ? `${item.width}px` : matchedColumn.width,
-          title: item.width !== undefined ? `${i18next.t(item.label)}` : matchedColumn.title,
-        };
-      }
-      return null;
-    })
-    .filter(col => col !== null);
-
-  const actionColumn = columns.find(col => col.key === actionKey);
-
-  return [
-    ...visibleColumns,
-    actionColumn,
-  ].filter(col => col);
-}
-
-export function getApiPaths() {
-  const objects = ["organization", "group", "user", "application", "provider", "resource", "cert", "role", "permission", "model", "adapter", "enforcer", "session", "record", "token", "product", "payment", "plan", "pricing", "subscription", "syncer", "webhook"];
-  const res = [];
-  objects.forEach(obj => {
-    ["add", "update", "delete"].forEach(action => {
-      res.push(`${action}-${obj}`);
-    });
-    if (obj === "payment") {
-      res.push("invoice-payment", "notify-payment");
-    }
-    if (obj === "product") {
-      res.push("buy-product");
-    }
-  });
-  return res;
 }

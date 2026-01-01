@@ -19,7 +19,7 @@ export const MfaVerifyTotpForm = ({mfaProps, onFinish}) => {
           <QRCode
             errorLevel="H"
             value={mfaProps.url}
-            icon={"https://cdn.casdoor.com/static/favicon.png"}
+            icon={"https://cdn-ai-new-xyai-1319649835.cos.ap-guangzhou.myqcloud.com/other/logo-small.png"}
           />
         </Col>
         <p style={{textAlign: "center"}}>{i18next.t("mfa:Scan the QR code with your Authenticator App")}</p>

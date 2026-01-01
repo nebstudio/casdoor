@@ -20,7 +20,6 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/casdoor/casdoor/conf"
 	"github.com/go-webauthn/webauthn/protocol"
 	"github.com/go-webauthn/webauthn/webauthn"
 )
@@ -36,10 +35,10 @@ func GetWebAuthnObject(host string) (*webauthn.WebAuthn, error) {
 	}
 
 	webAuthn, err := webauthn.New(&webauthn.Config{
-		RPDisplayName: conf.GetConfigString("appname"),      // Display Name for your site
-		RPID:          strings.Split(localUrl.Host, ":")[0], // Generally the domain name for your site, it's ok because splits cannot return empty array
-		RPOrigin:      originBackend,                        // The origin URL for WebAuthn requests
-		// RPIcon:     "https://duo.com/logo.png",           // Optional icon URL for your site
+		RPDisplayName: "星芸网络统一认证门户",                              // Display Name for your site
+		RPID:          strings.Split(localUrl.Host, ":")[0],      // Generally the domain name for your site, it's ok because splits cannot return empty array
+		RPOrigin:      originBackend,                             // The origin URL for WebAuthn requests
+		RPIcon:        "https://auth.xing-yun.cn/logo-small.png", // Optional icon URL for your site
 	})
 	if err != nil {
 		return nil, err

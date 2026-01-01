@@ -1,11 +1,11 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Casdoor RESTful API",
-        "description": "Swagger Docs of Casdoor Backend API",
+        "title": "Nebstudio SSO RESTful API",
+        "description": "Swagger Docs of Nebstudio SSO Backend API",
         "version": "1.503.0",
         "contact": {
-            "email": "casbin@googlegroups.com"
+            "email": "3163657900@qq.com"
         }
     },
     "basePath": "/",
@@ -989,13 +989,13 @@
                 "tags": [
                     "Enforcer API"
                 ],
-                "description": "Call Casbin BatchEnforce API",
+                "description": "Call Nebstudio SSO BatchEnforce API",
                 "operationId": "ApiController.BatchEnforce",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "array of casbin requests",
+                        "description": "array of Nebstudio SSO requests",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -1841,13 +1841,13 @@
                 "tags": [
                     "Enforcer API"
                 ],
-                "description": "Call Casbin Enforce API",
+                "description": "Call Nebstudio SSO Enforce API",
                 "operationId": "ApiController.Enforce",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Casbin request",
+                        "description": "Nebstudio SSO request",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -4183,7 +4183,7 @@
                 "tags": [
                     "System API"
                 ],
-                "description": "get version info like Casdoor release version and commit ID",
+                "description": "get version info like Nebstudio SSO release version and commit ID",
                 "operationId": "ApiController.GetVersionInfo",
                 "responses": {
                     "200": {
@@ -4956,7 +4956,7 @@
                 "tags": [
                     "Service API"
                 ],
-                "description": "This API is not for Casdoor frontend to call, it is for Casdoor SDKs.",
+                "description": "This API is not for Nebstudio SSO frontend to call, it is for Nebstudio SSO SDKs.",
                 "operationId": "ApiController.SendEmail",
                 "parameters": [
                     {
@@ -5036,7 +5036,7 @@
                 "tags": [
                     "Service API"
                 ],
-                "description": "This API is not for Casdoor frontend to call, it is for Casdoor SDKs.",
+                "description": "This API is not for Nebstudio SSO frontend to call, it is for Nebstudio SSO SDKs.",
                 "operationId": "ApiController.SendNotification",
                 "parameters": [
                     {
@@ -5064,7 +5064,7 @@
                 "tags": [
                     "Service API"
                 ],
-                "description": "This API is not for Casdoor frontend to call, it is for Casdoor SDKs.",
+                "description": "This API is not for Nebstudio SSO frontend to call, it is for Nebstudio SSO SDKs.",
                 "operationId": "ApiController.SendSms",
                 "parameters": [
                     {

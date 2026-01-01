@@ -32,9 +32,9 @@ const authInfo = {
   },
   WeChat: {
     scope: "snsapi_login",
-    endpoint: "https://open.weixin.qq.com/connect/qrconnect",
+    endpoint: "https://wxredirect.xing-yun.cn/connect/qrconnect",
     mpScope: "snsapi_userinfo",
-    mpEndpoint: "https://open.weixin.qq.com/connect/oauth2/authorize",
+    mpEndpoint: "https://wxredirect.xing-yun.cn/connect/oauth2/authorize",
   },
   WeChatMiniProgram: {
     endpoint: "https://mp.weixin.qq.com/",
